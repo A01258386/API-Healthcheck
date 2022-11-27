@@ -9,7 +9,7 @@ export default function EndpointHealth() {
 	const getStats = () => {
 	
         // fetch(`http://steven-kafka-apple-banana.eastus.cloudapp.azure.com:8100/stats`)
-        fetch(`http://192.168.1.73:8120/healthcheck`)
+        fetch(`http://kafka.westus3.cloudapp.azure.com:8120/healthcheck`)
             .then(res => res.json())
             .then((result)=>{
 				console.log("Received Stats")

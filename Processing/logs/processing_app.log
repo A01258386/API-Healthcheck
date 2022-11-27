@@ -1,0 +1,6 @@
+2022-11-27 14:53:15,139 - basicLogger - INFO - App Conf File: app_conf.yml
+2022-11-27 14:53:15,140 - basicLogger - INFO - Log Conf File: processing_log_config.yml
+2022-11-27 14:53:15,206 - basicLogger - INFO - App Conf File: app_conf.yml
+2022-11-27 14:53:15,207 - basicLogger - INFO - Log Conf File: processing_log_config.yml
+2022-11-27 14:53:20,341 - basicLogger - INFO - Populate process start
+2022-11-27 14:53:25,344 - basicLogger - INFO - Populate process start
