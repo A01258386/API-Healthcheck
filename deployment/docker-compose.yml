@@ -68,8 +68,9 @@ services:
       - storage
     network_mode: "host"
     volumes:
-      - /home/azureuser/logs/processing:/logs
+      - /home/azureuser/logs/processing:/app/logs
       - /home/azureuser/processing-db:/app/data
+      - /home/config/processing:/config
 
 
   receiver:
