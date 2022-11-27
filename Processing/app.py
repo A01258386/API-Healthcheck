@@ -23,7 +23,7 @@ import os
 
 if "TARGET_ENV" in os.environ and os.environ["TARGET_ENV"] == "test":
     print("In Test Environment")
-    app_conf_file = "/config/app_conF.yml"
+    app_conf_file = "/config/app_conf.yml"
     log_conf_file = "/config/processing_log_config.yml"
 else:
     print("In Dev Environment")
