@@ -67,6 +67,11 @@ services:
     depends_on:
       - storage
     network_mode: "host"
+    volumes:
+      - /home/azureuser/logs/processing:/logs
+      - /home/azureuser/processing-db:/app/data
+
+
   receiver:
     container_name: receiver
     build: ../Receiver/
