@@ -95,3 +95,9 @@ services:
     depends_on:
       - "processing"
       - "audit"
+  healthcheck:
+    container_name: healthcheck
+    build: ../healthcheck/
+    image: healthcheck
+    ports:
+      - '8120:8120'
