@@ -56,6 +56,9 @@ services:
     restart: unless-stopped
     depends_on:
       - kafka
+    volumes:
+      - /home/azureuser/logs/audit:/app/logs
+      - /home/azureuser/config/audit_log:/config
 
   processing:
     container_name: processing
@@ -82,6 +85,9 @@ services:
     restart: unless-stopped
     depends_on:
       - kafka
+    volumes:
+      - /home/azureuser/logs/receiver:/app/logs
+      - /home/azureuser/config/receiver:/config
     
   storage:
     container_name: storage
@@ -92,6 +98,10 @@ services:
     restart: unless-stopped
     depends_on:
       - kafka
+    volumes:
+      - /home/azureuser/logs/storage:/app/logs
+      - /home/azureuser/config/storage:/config
+
   dashboard-ui:
     container_name: dashboard-ui
     build: ../dashboard-ui/
