@@ -143,6 +143,6 @@ services:
     - "80:80"
     networks:
       - "api.network"
-  networks:
-    api.network:
+networks:
+  api.network:
 
