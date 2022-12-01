@@ -1,8 +1,8 @@
 datastore:
   filename: ./data/stats.sqlite
 eventstore:
-  url: http://kafka.westus3.cloudapp.azure.com:8090/drive_stats
-  url2: http://kafka.westus3.cloudapp.azure.com:8090/fly_stats
+  url: http://kafka.westus3.cloudapp.azure.com/storage/drive_stats
+  url2: http://kafka.westus3.cloudapp.azure.com/storage/fly_stats
 scheduler:
   period_sec: 5
   start_time: '2022-11-27 14:16:43'

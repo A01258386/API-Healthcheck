@@ -52,28 +52,31 @@ services:
     build: ../Audit/
     image: audit:latest
     ports:
-      - "8110:8110"
+      - "8110"
     restart: unless-stopped
     depends_on:
       - kafka
     volumes:
       - /home/azureuser/logs/audit:/app/logs
       - /home/azureuser/config/audit_log:/config
+    networks:
+      - "api.network"
 
   processing:
     container_name: processing
     build: ../Processing/
     image: processing:latest
     ports:
-      - "8100:8100"
+      - "8100"
     restart: unless-stopped
     depends_on:
       - storage
-    network_mode: "host"
     volumes:
       - /home/azureuser/logs/processing:/app/logs
       - /home/azureuser/processing-db:/app/data
       - /home/config/processing:/config
+    networks:
+      - "api.network"
 
 
   receiver:
@@ -81,39 +84,65 @@ services:
     build: ../Receiver/
     image: receiver:latest
     ports:
-      - "8080:8080"
+      - "8080"
     restart: unless-stopped
     depends_on:
       - kafka
     volumes:
       - /home/azureuser/logs/receiver:/app/logs
       - /home/azureuser/config/receiver:/config
+    networks:
+      - "api.network"
     
   storage:
     container_name: storage
     build: ../Storage/
     image: storage:latest
     ports:
-      - "8090:8090"
+      - "8090"
     restart: unless-stopped
     depends_on:
       - kafka
     volumes:
       - /home/azureuser/logs/storage:/app/logs
       - /home/azureuser/config/storage:/config
+    networks:
+      - "api.network"
 
   dashboard-ui:
     container_name: dashboard-ui
     build: ../dashboard-ui/
     image: dashboard:latest
     ports:
-      - "3000:3000"
+      - "3000"
     depends_on:
       - "processing"
       - "audit"
+    networks:
+      - "api.network"
   healthcheck:
     container_name: healthcheck
     build: ../healthcheck/
     image: healthcheck
     ports:
       - '8120:8120'
+  nginx:
+    image: nginx:latest
+    # Connects the conf file of the container to the conf file in our folder
+    volumes:
+    - /home/azureuser/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    # It will start up the nginx only when all api containers have started
+    depends_on:
+    - "receiver"
+    - "storage"
+    - "processing"
+    - "audit"
+    - "dashboard"
+    # Connects the port 80 of the nginx container to localhost:80 or localhost
+    ports:
+    - "80:80"
+    networks:
+      - "api.network"
+  networks:
+    api.network:
+
